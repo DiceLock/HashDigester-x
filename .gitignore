@@ -1,0 +1,5 @@
+## Ignore build temporary files
+*.o
+*.d
+*~
+ 
