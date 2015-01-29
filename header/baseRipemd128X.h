@@ -29,7 +29,7 @@
 
 #define RIPEMD_Transform128X(f, a, b, c, d, x, s, k)\
 	(*a) += f((*b), (*c), (*d)) + x + k;\
-	(*a) = RIPEMD_RotateLeft((*a), s);\
+	(*a) = RIPEMD_RotateLeft((*a), s);
 
 
 namespace DiceLockSecurity {

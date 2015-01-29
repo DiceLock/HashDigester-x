@@ -109,6 +109,7 @@ namespace DiceLockSecurity {
 		for (i = 60; i < SHA1_OPERATIONS; i++) {
 			SHA1_Operation_Tail(SHA1_Parity, &a, &b, &c, &d, &e, &temp, i, this->constants[3]);
 		}
+
 		// Upgrading hash values
 		digest->SetULPosition(0, digest->GetULPosition(0) + a);
 		digest->SetULPosition(1, digest->GetULPosition(1) + b);

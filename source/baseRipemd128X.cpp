@@ -21,7 +21,6 @@
 // 
 
 #include "baseRipemd128X.h"
-#include <stdio.h>
 
 
 namespace DiceLockSecurity {

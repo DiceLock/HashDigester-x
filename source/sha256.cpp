@@ -22,7 +22,7 @@
 
 #include <memory.h>
 #include "sha256.h"
-#include <stdio.h>
+
 
 #define SHA256_Operation_Ini(a, b, c, d, e, f, g, h, temp1, temp2, j)\
 	(*temp1) = (*h) + SHA256_SUM_1((*e)) + BASESHA_32_Ch((*e), (*f), (*g)) + (this->constants[j]) + (messageSchedule[j]);\

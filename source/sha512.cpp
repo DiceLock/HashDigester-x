@@ -271,6 +271,7 @@ namespace DiceLockSecurity {
 			memset(this->remainingBytes + this->remainingBytesLength + 1, 0, this->GetUCHashBlockLength() - this->remainingBytesLength -1);
 			this->Compress(this->messageDigest, this->remainingBytes);
 			this->AddMessageLength(this->remainingBytesLength);
+			int i; i=this->GetUCHashBlockLength();
 			memset(this->remainingBytes, 0, this->GetUCHashBlockLength());
 			this->remainingBytesLength = 0;
 		}

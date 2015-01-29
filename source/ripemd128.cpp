@@ -22,7 +22,7 @@
 
 #include <memory.h>
 #include "ripemd128.h"
-#include <stdio.h>
+
 
 namespace DiceLockSecurity {
 	
