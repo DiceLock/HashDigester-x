@@ -1,8 +1,8 @@
 //
 // Creator:    http://www.dicelocksecurity.com
-// Version:    vers.4.0.0.1
+// Version:    vers.5.0.0.1
 //
-// Copyright  2009-2010 DiceLock Security, LLC. All rigths reserved.
+// Copyright 2009-2011 DiceLock Security, LLC. All rights reserved.
 //
 //                               DISCLAIMER
 //
@@ -16,10 +16,12 @@
 // WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
 // OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 // ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-//
+// 
 // DICELOCK IS A REGISTERED TRADEMARK OR TRADEMARK OF THE OWNERS.
-//
+// 
 
+#include <stdexcept>
+#include <stdlib.h>
 #include "hashSuite.h"
 
 
@@ -27,13 +29,13 @@ using namespace std;
 
 
 namespace DiceLockSecurity {
-
+	
   namespace Hash {
 
 		// Points the first hash in the suite
 		const Hashes HashSuite::firstHash = SHA_1;
 
-		// Constructor, default, initializes suite
+		// Constructor, default, initializes suite 
 		HashSuite::HashSuite() {
 			int i;
 
@@ -59,7 +61,7 @@ namespace DiceLockSecurity {
 		}
 
 		// ADDING HASHES
-
+			
 		// Adds a random test to the suite
 		void HashSuite::Add(BaseHash* hash) {
 
@@ -74,55 +76,55 @@ namespace DiceLockSecurity {
 		void HashSuite::Add(Hashes hash) {
 
 			switch (hash) {
-				case SHA_1:
+				case SHA_1: 
 					if (this->suite[SHA_1] == NULL) {
 						this->suite[SHA_1] = new Sha1();
 						this->instantiatedHashes++;
 					}
 					break;
-				case SHA_224:
+				case SHA_224: 
 					if (this->suite[SHA_224] == NULL) {
 						this->suite[SHA_224] = new Sha224();
 						this->instantiatedHashes++;
 					}
 					break;
-				case SHA_256:
+				case SHA_256: 
 					if (this->suite[SHA_256] == NULL) {
 						this->suite[SHA_256] = new Sha256();
 						this->instantiatedHashes++;
 					}
 					break;
-				case SHA_384:
+				case SHA_384: 
 					if (this->suite[SHA_384] == NULL) {
 						this->suite[SHA_384] = new Sha384();
 						this->instantiatedHashes++;
 					}
 					break;
-				case SHA_512:
+				case SHA_512: 
 					if (this->suite[SHA_512] == NULL) {
 						this->suite[SHA_512] = new Sha512();
 						this->instantiatedHashes++;
 					}
 					break;
-				case RIPEMD_128:
+				case RIPEMD_128: 
 					if (this->suite[RIPEMD_128] == NULL) {
 						this->suite[RIPEMD_128] = new Ripemd128();
 						this->instantiatedHashes++;
 					}
 					break;
-				case RIPEMD_160:
+				case RIPEMD_160: 
 					if (this->suite[RIPEMD_160] == NULL) {
 						this->suite[RIPEMD_160] = new Ripemd160();
 						this->instantiatedHashes++;
 					}
 					break;
-				case RIPEMD_256:
+				case RIPEMD_256: 
 					if (this->suite[RIPEMD_256] == NULL) {
 						this->suite[RIPEMD_256] = new Ripemd256();
 						this->instantiatedHashes++;
 					}
 					break;
-				case RIPEMD_320:
+				case RIPEMD_320: 
 					if (this->suite[RIPEMD_320] == NULL) {
 						this->suite[RIPEMD_320] = new Ripemd320();
 						this->instantiatedHashes++;
@@ -134,7 +136,7 @@ namespace DiceLockSecurity {
 			this->selfCreatedHash[hash] = true;
 		}
 
-		// Creates and adds all hash algorithms to the suite
+		// Creates and adds all hash algorithms to the suite 
 		void HashSuite::AddAll(void) {
 			int i;
 
@@ -227,7 +229,7 @@ namespace DiceLockSecurity {
 		}
 
 		// GETTING HASH OBJECT
-
+			
 		// Gets a hash algorithm from the suite based in the enumerated hash
 		BaseHash* HashSuite::GetMessageDigest(Hashes hash) {
 
@@ -453,25 +455,25 @@ namespace DiceLockSecurity {
 
 		// PERFORMING HASH
 
-		// Performs the hash algorithms of BaseCryptoRandomStream with all instantiated hash
+		// Performs the hash algorithms of BaseCryptoRandomStream with all instantiated hash 
 		void HashSuite::Hash(BaseCryptoRandomStream* stream) {
 			int i;
-
+			
 			this->Initialize();
 			for (i=this->GetFirstHash(); i<this->GetMaximumNumberOfHashes(); i++) {
 				if (this->suite[i] != NULL) {
-					this->suite[i]->Add(stream);
-					this->suite[i]->Finalize();
+					this->suite[i]->Add(stream); 
+					this->suite[i]->Finalize(); 
 				}
 			}
 		}
 
 		// INITIALIZE SUITE
-
+			
 		// Initializes all hash algorithms in the suite
 		void HashSuite::Initialize(void) {
 			int i;
-
+			
 			for (i=this->GetFirstHash(); i<this->GetMaximumNumberOfHashes(); i++) {
 				if (this->suite[i] != NULL) {
 					this->suite[i]->Initialize();
@@ -480,11 +482,11 @@ namespace DiceLockSecurity {
 		}
 
 		// ADDS STREAM TO THE SUITE
-
+			
 		// Adds BaseCryptoRandomStream stream to hash algorithms in the suite
 		void HashSuite::Add(BaseCryptoRandomStream* stream) {
 			int i;
-
+			
 			for (i=this->GetFirstHash(); i<this->GetMaximumNumberOfHashes(); i++) {
 				if (this->suite[i] != NULL) {
 					this->suite[i]->Add(stream);
@@ -493,11 +495,11 @@ namespace DiceLockSecurity {
 		}
 
 		// FINALIZE THE SUITE
-
+			
 		// Finalize hash algorithms in the suite
 		void HashSuite::Finalize(void) {
 			int i;
-
+			
 			for (i=this->GetFirstHash(); i<this->GetMaximumNumberOfHashes(); i++) {
 				if (this->suite[i] != NULL) {
 					this->suite[i]->Finalize();

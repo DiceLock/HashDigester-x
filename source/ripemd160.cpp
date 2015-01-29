@@ -1,8 +1,8 @@
 //
 // Creator:    http://www.dicelocksecurity.com
-// Version:    vers.4.0.0.1
+// Version:    vers.5.0.0.1
 //
-// Copyright � 2009-2010 DiceLock Security, LLC. All rigths reserved.
+// Copyright 2009-2011 DiceLock Security, LLC. All rights reserved.
 //
 //                               DISCLAIMER
 //
@@ -16,21 +16,21 @@
 // WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
 // OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 // ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-//
+// 
 // DICELOCK IS A REGISTERED TRADEMARK OR TRADEMARK OF THE OWNERS.
-//
+// 
 
-//#include <memory.h>
+#include <memory.h>
 #include "ripemd160.h"
 
 
 namespace DiceLockSecurity {
-
+	
   namespace Hash {
 
 	// Hash Algorithms Class enumerator name
 	const Hashes Ripemd160::hashName = RIPEMD_160;
-
+	
 	// Number of hash bits
 	const unsigned short int Ripemd160::hashBits = 160;
 	// Number of hash unsigned chars
@@ -48,7 +48,7 @@ namespace DiceLockSecurity {
 	Ripemd160::~Ripemd160() {
 	}
 
-	// Computes the 64 byte chunk of stream information
+	// Computes the 64 byte chunk of stream information 
 	void Ripemd160::Compress(unsigned long int* stream) {
 		unsigned long int a1 = this->messageDigest->GetULPosition(0), a2 = this->messageDigest->GetULPosition(0);
 		unsigned long int b1 = this->messageDigest->GetULPosition(1), b2 = this->messageDigest->GetULPosition(1);

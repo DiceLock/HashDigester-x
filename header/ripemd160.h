@@ -1,8 +1,8 @@
 //
 // Creator:    http://www.dicelocksecurity.com
-// Version:    vers.4.0.0.1
+// Version:    vers.5.0.0.1
 //
-// Copyright � 2009-2010 DiceLock Security, LLC. All rigths reserved.
+// Copyright 2009-2011 DiceLock Security, LLC. All rights reserved.
 //
 //                               DISCLAIMER
 //
@@ -16,14 +16,13 @@
 // WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
 // OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 // ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-//
+// 
 // DICELOCK IS A REGISTERED TRADEMARK OR TRADEMARK OF THE OWNERS.
-//
+// 
 
 #ifndef RIPEMD160_HPP
 
 #define RIPEMD160_HPP
-
 
 #include "baseRipemd160X.h"
 
@@ -36,44 +35,44 @@ namespace DiceLockSecurity {
 
 		private:
 
-			// Computes the 64 byte chunk of information
+			/// Computes the 64 byte chunk of information  
 			void Compress(unsigned long int*);
 
 	    protected:
 
-			// Hash Algorithms Class enumerator name
+			/// Hash Algorithms Class enumerator name
 			static const Hashes	hashName;
 
-			// Number of hash bits
+			/// Number of hash bits
 			static const unsigned short int hashBits;
-			// Number of hash unsigned chars
+			/// Number of hash unsigned chars
 			static const unsigned short int hashUCs;
-			// Number of hash unsigned short ints
+			/// Number of hash unsigned short ints
 			static const unsigned short int hashUSs;
-			// Number of hash unsigned long ints
+			/// Number of hash unsigned long ints
 			static const unsigned short int hashULs;
 
 	    public:
 
-			// Constructor, default
+			/// Constructor, default 
 			Ripemd160();
 
-			// Destructor
+			/// Destructor
 			~Ripemd160();
 
-			// Gets hash length in bits
+			/// Gets hash length in bits
 			unsigned short int GetBitHashLength(void);
 
-			// Gets hash length in unsigned chars
+			/// Gets hash length in unsigned chars
 			unsigned short int GetUCHashLength(void);
 
-			// Gets hash length in unsigned short ints
+			/// Gets hash length in unsigned short ints
 			unsigned short int GetUSHashLength(void);
 
-			// Gets hash length in unsigned long ints
+			/// Gets hash length in unsigned long ints
 			unsigned short int GetULHashLength(void);
 
-			// Gets the type of the object
+			/// Gets the type of the object
 			Hashes GetType(void);
 	};
   }

@@ -1,8 +1,8 @@
 //
 // Creator:    http://www.dicelocksecurity.com
-// Version:    vers.4.0.0.1
+// Version:    vers.5.0.0.1
 //
-// Copyright � 2008-2010 DiceLock Security, LLC. All rigths reserved.
+// Copyright 2008-2011 DiceLock Security, LLC. All rights reserved.
 //
 //                               DISCLAIMER
 //
@@ -16,14 +16,13 @@
 // WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
 // OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 // ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-//
+// 
 // DICELOCK IS A REGISTERED TRADEMARK OR TRADEMARK OF THE OWNERS.
-//
+// 
 
 #ifndef DEFAULTCRYPTORANDOMSTREAM_HPP
 
 #define DEFAULTCRYPTORANDOMSTREAM_HPP
-
 
 #include "baseCryptoRandomStream.h"
 
@@ -36,53 +35,54 @@ namespace DiceLockSecurity {
 
 	private:
 
-			// CryptoRandomStream type enumerator name
+			/// CryptoRandomStream type enumerator name
 			static const CryptoRandomStreams	cryptoRandomStreamType;
 
+			/// Indicates if memory stream object has been internally generated
 			bool	autoMemory;
 
 		public:
 
-			// Constructor, default
+			/// Constructor, default 
 			DefaultCryptoRandomStream(void);
 
-			// Constructor, creates an empty stream with the indicated length
+			/// Constructor, creates an empty stream with the indicated length 
 			DefaultCryptoRandomStream(unsigned long int);
 
-			// Constructor, sets the pointed stream of the indicated length
+			/// Constructor, sets the pointed stream of the indicated length 
 			DefaultCryptoRandomStream(void *, unsigned long int);
 
-			// Destructor
+			/// Destructor
 			~DefaultCryptoRandomStream();
 
-			// Sets an empty stream with the indicated length in bits
+			/// Sets an empty stream with the indicated length in bits
 			void SetCryptoRandomStreamBit(unsigned long int);
 
-			// Sets the pointed stream of indicated length in bits
+			/// Sets the pointed stream of indicated length in bits
 			void SetCryptoRandomStreamBit(void *, unsigned long int);
 
-			// Sets an empty stream with the indicated length in unsigned chars
+			/// Sets an empty stream with the indicated length in unsigned chars
 			void SetCryptoRandomStreamUC(unsigned long int);
 
-			// Sets the pointed stream of indicated length in unsigned chars
+			/// Sets the pointed stream of indicated length in unsigned chars
 			void SetCryptoRandomStreamUC(void *, unsigned long int);
 
-			// Sets an empty stream with the indicated length in unsigned shorts
+			/// Sets an empty stream with the indicated length in unsigned shorts
 			void SetCryptoRandomStreamUS(unsigned long int);
 
-			// Sets the pointed stream of indicated length in unsigned shorts
+			/// Sets the pointed stream of indicated length in unsigned shorts
 			void SetCryptoRandomStreamUS(void *, unsigned long int);
 
-			// Sets an empty stream with the indicated length in unsigned longs
+			/// Sets an empty stream with the indicated length in unsigned longs
 			void SetCryptoRandomStreamUL(unsigned long int);
 
-			// Sets the pointed stream of indicated length in unsigned longs
+			/// Sets the pointed stream of indicated length in unsigned longs
 			void SetCryptoRandomStreamUL(void *, unsigned long int);
 
-			// Set the pointed stream as hexadecimal string
+			/// Set the pointed stream as hexadecimal string
 			void SetCryptoRandomStreamHexString(const char*);
 
-			// Gets the CryptoRandomStream type of the object
+			/// Gets the CryptoRandomStream type of the object
 			CryptoRandomStreams GetCryptoRandomStreamType(void);
 
 	};

@@ -1,8 +1,8 @@
 //
 // Creator:    http://www.dicelocksecurity.com
-// Version:    vers.4.0.0.1
+// Version:    vers.5.0.0.1
 //
-// Copyright � 2009-2010 DiceLock Security, LLC. All rigths reserved.
+// Copyright 2009-2011 DiceLock Security, LLC. All rights reserved.
 //
 //                               DISCLAIMER
 //
@@ -16,14 +16,13 @@
 // WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
 // OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 // ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-//
+// 
 // DICELOCK IS A REGISTERED TRADEMARK OR TRADEMARK OF THE OWNERS.
-//
+// 
 
 #ifndef SHA256_HPP
 
 #define SHA256_HPP
-
 
 #include "baseSha32.h"
 
@@ -47,7 +46,6 @@
 #define SHA256_SIG_0(x) (SHA256_RotateRight(x, 7) ^ SHA256_RotateRight(x, 18) ^ SHA256_ShiftRight(x, 3))
 #define SHA256_SIG_1(x) (SHA256_RotateRight(x, 17) ^ SHA256_RotateRight(x, 19) ^ SHA256_ShiftRight(x, 10))
 
-
 namespace DiceLockSecurity {
 
   namespace Hash {
@@ -56,59 +54,62 @@ namespace DiceLockSecurity {
 
 		private:
 
-			// Hash Algorithms Class enumerator name
+			/// Hash Algorithms Class enumerator name
 			static const Hashes	hashName;
 
-			// Number of hash bits
+			/// Number of hash bits
 			static const unsigned short int hashBits;
-			// Number of hash unsigned chars
+			/// Number of hash unsigned chars
 			static const unsigned short int hashUCs;
-			// Number of hash unsigned short ints
+			/// Number of hash unsigned short ints
 			static const unsigned short int hashUSs;
-			// Number of hash unsigned long ints
+			/// Number of hash unsigned long ints
 			static const unsigned short int hashULs;
 
-			// Number of schedule words
+			/// Number of schedule words
 			static const unsigned short int scheduleNumber;
 
-			// Initial hash values of SHA256
+			/// Initial hash values of SHA256 
 			static const unsigned long int initials[SHA256_DIGESTULONGS];
 
-			// Computational constant values of SHA256
+			/// Computational constant values of SHA256 
 			static const unsigned long int constants[SHA256_COMPUTECONSTANTS];
 
-			// Message schedule words for SHA256
+			/// Message schedule words for SHA256 
 			unsigned long int messageSchedule[SHA256_MESSAGESCHEDULE];
 
 		protected:
 
-			// Computes the chunk block of information
+			/// Computes the chunk block of information  
 			void Compress(BaseCryptoRandomStream*, unsigned char*);
 
 		public:
 
-			// Constructor, default
+			/// Constructor, default 
 			Sha256();
 
-			// Destructor
+			/// Destructor
 			~Sha256();
 
-			// Initializes common states of Sha1 algorithm
+			/// Initializes common states of Sha1 algorithm
 			void Initialize(void);
 
-			// Gets hash length in bits
+			/// Finalizes hash and performs little endian transformation
+			void Finalize(void);
+
+			/// Gets hash length in bits
 			unsigned short int GetBitHashLength(void);
 
-			// Gets hash length in unsigned chars
+			/// Gets hash length in unsigned chars
 			unsigned short int GetUCHashLength(void);
 
-			// Gets hash length in unsigned short ints
+			/// Gets hash length in unsigned short ints
 			unsigned short int GetUSHashLength(void);
 
-			// Gets hash length in unsigned long ints
+			/// Gets hash length in unsigned long ints
 			unsigned short int GetULHashLength(void);
 
-			// Gets the type of the object
+			/// Gets the type of the object
 			Hashes GetType(void);
 	};
   }

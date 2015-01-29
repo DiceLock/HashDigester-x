@@ -1,8 +1,8 @@
 //
 // Creator:    http://www.dicelocksecurity.com
-// Version:    vers.4.0.0.1
+// Version:    vers.5.0.0.1
 //
-// Copyright � 2009-2010 DiceLock Security, LLC. All rigths reserved.
+// Copyright 2009-2011 DiceLock Security, LLC. All rights reserved.
 //
 //                               DISCLAIMER
 //
@@ -16,20 +16,21 @@
 // WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
 // OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 // ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-//
+// 
 // DICELOCK IS A REGISTERED TRADEMARK OR TRADEMARK OF THE OWNERS.
-//
+// 
 
+#include <memory.h>
 #include "ripemd320.h"
 
 
 namespace DiceLockSecurity {
-
+	
   namespace Hash {
 
 	// Hash Algorithms Class enumerator name
 	const Hashes Ripemd320::hashName = RIPEMD_320;
-
+	
 	// Number of hash bits
 	const unsigned short int Ripemd320::hashBits = 320;
 	// Number of hash unsigned chars
@@ -65,18 +66,18 @@ namespace DiceLockSecurity {
 		this->messageDigest->SetULPosition(9, inistate9);
 	}
 
-	// Computes the 64 byte chunk of stream information
+	// Computes the 64 byte chunk of stream information 
 	void Ripemd320::Compress(unsigned long int* stream) {
 		unsigned long int a1 = this->messageDigest->GetULPosition(0);
-		unsigned long int b1 = this->messageDigest->GetULPosition(1);
-		unsigned long int c1 = this->messageDigest->GetULPosition(2);
-		unsigned long int d1 = this->messageDigest->GetULPosition(3);
-		unsigned long int e1 = this->messageDigest->GetULPosition(4);
+		unsigned long int b1 = this->messageDigest->GetULPosition(1); 
+		unsigned long int c1 = this->messageDigest->GetULPosition(2); 
+		unsigned long int d1 = this->messageDigest->GetULPosition(3); 
+		unsigned long int e1 = this->messageDigest->GetULPosition(4); 
 		unsigned long int a2 = this->messageDigest->GetULPosition(5);
 		unsigned long int b2 = this->messageDigest->GetULPosition(6);
 		unsigned long int c2 = this->messageDigest->GetULPosition(7);
 		unsigned long int d2 = this->messageDigest->GetULPosition(8);
-		unsigned long int e2 = this->messageDigest->GetULPosition(9);
+		unsigned long int e2 = this->messageDigest->GetULPosition(9); 
 		unsigned long int temp;
 		Transform_F0(&a1, &b1, &c1, &d1, &e1, stream);
 		Transform_J5(&a2, &b2, &c2, &d2, &e2, stream);

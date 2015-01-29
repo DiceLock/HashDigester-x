@@ -1,8 +1,8 @@
 //
 // Creator:    http://www.dicelocksecurity.com
-// Version:    vers.4.0.0.1
+// Version:    vers.5.0.0.1
 //
-// Copyright � 2008-2010 DiceLock Security, LLC. All rigths reserved.
+// Copyright 2008-2011 DiceLock Security, LLC. All rights reserved.
 //
 //                               DISCLAIMER
 //
@@ -16,10 +16,11 @@
 // WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
 // OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 // ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-//
+// 
 // DICELOCK IS A REGISTERED TRADEMARK OR TRADEMARK OF THE OWNERS.
-//
+// 
 
+#include <memory.h>
 #include "baseCryptoRandomStream.h"
 
 
@@ -57,17 +58,17 @@ namespace DiceLockSecurity {
 	// Gets the current bit position
 	unsigned long int BaseCryptoRandomStream::GetBitPosition(void) {
 
-		return this->position;
+		return this->position; 
 	}
 
 	// Gets the stream length in bits
 	unsigned long int BaseCryptoRandomStream::GetBitLength(void) {
 
 		if ( this->reducedBitLength ) {
-			return this->reducedBitLength;
+			return this->reducedBitLength; 
 		}
 		else {
-			return this->bitLength;
+			return this->bitLength; 
 		}
 	}
 
@@ -75,21 +76,21 @@ namespace DiceLockSecurity {
 	unsigned long int BaseCryptoRandomStream::GetUCLength(void) {
 
 		if ( this->reducedBitLength ) {
-			return (this->reducedBitLength / (BYTEBITS * sizeof(unsigned char)));
+			return (this->reducedBitLength / (BYTEBITS * sizeof(unsigned char))); 
 		}
 		else {
-			return (this->bitLength / (BYTEBITS * sizeof(unsigned char)));
+			return (this->bitLength / (BYTEBITS * sizeof(unsigned char)));  
 		}
-	}
+	} 
 
 	// Gets the stream length in unsigned short type
 	unsigned long int BaseCryptoRandomStream::GetUSLength(void) {
 
 		if ( this->reducedBitLength ) {
-			return (this->reducedBitLength / (BYTEBITS * sizeof(unsigned short int)));
+			return (this->reducedBitLength / (BYTEBITS * sizeof(unsigned short int))); 
 		}
 		else {
-			return (this->bitLength / (BYTEBITS * sizeof(unsigned short int)));
+			return (this->bitLength / (BYTEBITS * sizeof(unsigned short int))); 
 		}
 	}
 
@@ -97,10 +98,10 @@ namespace DiceLockSecurity {
 	unsigned long int BaseCryptoRandomStream::GetULLength(void) {
 
 		if ( this->reducedBitLength ) {
-			return (this->reducedBitLength / (BYTEBITS * sizeof(unsigned long int)));
+			return (this->reducedBitLength / (BYTEBITS * sizeof(unsigned long int))); 
 		}
 		else {
-			return (this->bitLength / (BYTEBITS * sizeof(unsigned long int)));
+			return (this->bitLength / (BYTEBITS * sizeof(unsigned long int))); 
 		}
 	}
 
@@ -108,17 +109,17 @@ namespace DiceLockSecurity {
 	unsigned long long int BaseCryptoRandomStream::Get64Length(void) {
 
 		if ( this->reducedBitLength ) {
-			return (this->reducedBitLength / (BYTEBITS * sizeof(unsigned long long int)));
+			return (this->reducedBitLength / (BYTEBITS * sizeof(unsigned long long int))); 
 		}
 		else {
-			return (this->bitLength / (BYTEBITS * sizeof(unsigned long long int)));
+			return (this->bitLength / (BYTEBITS * sizeof(unsigned long long int))); 
 		}
 	}
 
-	// Gets the pointer to the memory stream
+	// Gets the pointer to the memory stream 
 	void* BaseCryptoRandomStream::GetCryptoRandomStreamMemory(void) {
 
-		return this->cryptoStream;
+		return this->cryptoStream; 	
 	}
 
 	// Sets the BaseCryptoRandomStream bit at current position and moves pointer to the following bit
@@ -163,21 +164,21 @@ namespace DiceLockSecurity {
 	void BaseCryptoRandomStream::FillUC(unsigned char value) {
 
 		if (this->cryptoStream != NULL)
-			memset(this->cryptoStream, value, this->GetUCLength());
+			memset(this->cryptoStream, value, this->GetUCLength()); 
 	}
-
+			
 	// Sets the stream to an specified bit unsigned short value
 	void BaseCryptoRandomStream::FillUS(unsigned short int value) {
 
 		if (this->cryptoStream != NULL)
-			memset(this->cryptoStream, value, this->GetUCLength());
+			memset(this->cryptoStream, value, this->GetUCLength()); 
 	}
-
+			
 	// Sets the stream to an specified bit unsigned long int value
 	void BaseCryptoRandomStream::FillUL(unsigned long int value) {
 
 		if (this->cryptoStream != NULL)
-			memset(this->cryptoStream, value, this->GetUCLength());
+			memset(this->cryptoStream, value, this->GetUCLength()); 
 	}
 
 	// Sets the bit unsigned char (value 0 or 1) at specified postion, position based in array of bits
@@ -236,7 +237,7 @@ namespace DiceLockSecurity {
 			throw str;
 		}
 	}
-
+			
 	// Sets the unsigned long at specified position, position based in array of unsigned long
 	void BaseCryptoRandomStream::SetULPosition(unsigned long int pos, unsigned long int longData) {
 		unsigned long int* pointer;
@@ -254,7 +255,7 @@ namespace DiceLockSecurity {
 		}
 	}
 
-	// Sets the unsigned 64 bit at specified postion, position based in array of unsigned unsigned long long int
+	// Sets the unsigned 64 bit at specified postion, position based in array of unsigned long long int
 	void BaseCryptoRandomStream::Set64Position(unsigned long long int pos, unsigned long long int longData) {
 		unsigned long long int* pointer;
 
@@ -312,35 +313,35 @@ namespace DiceLockSecurity {
 			throw str;
 		}
 	}
-
+			
 	// Gets the unsigned long at specified position, position based in array of unsigned long
 	unsigned long int BaseCryptoRandomStream::GetULPosition(unsigned long int pos) {
 
 		try {
 			if ( pos >= this->GetULLength() )
 				throw "Positions exceeded stream length !";
-			else
+			else 
 				return *((unsigned long int *)(&(this->cryptoStream[pos * sizeof(unsigned long int)])));
 		}
 		catch (char* str) {
 			throw str;
 		}
 	}
-
+			
 	// Gets the unsigned 64 bit at specified position, position based in array of unsigned 64 bit
 	unsigned long long int BaseCryptoRandomStream::Get64Position(unsigned long long int pos) {
 
 		try {
 			if ( pos >= this->Get64Length() )
 				throw "Positions exceeded stream length !";
-			else
+			else 
 				return *((unsigned long long int *)(&(this->cryptoStream[pos * sizeof(unsigned long long int)])));
 		}
 		catch (char* str) {
 			throw str;
 		}
 	}
-
+			
 	// Gets the unsigned char at specified postion, position based in array of unsigned char
 	unsigned char* BaseCryptoRandomStream::GetUCAddressPosition(unsigned long int pos) {
 
@@ -358,7 +359,7 @@ namespace DiceLockSecurity {
 		else
 			return (unsigned short int *)(&(this->cryptoStream[pos * sizeof(unsigned short int)]));
 	}
-
+			
 	// Gets the unsigned long at specified postion, position based in array of unsigned long
 	unsigned long int* BaseCryptoRandomStream::GetULAddressPosition(unsigned long int pos) {
 
@@ -367,7 +368,7 @@ namespace DiceLockSecurity {
 		else
 			return (unsigned long int *)(&(this->cryptoStream[pos * sizeof(unsigned long int)]));
 	}
-
+			
 	// Gets the unsigned 64 bit at specified postion, position based in array of unsigned 64 bit
 	unsigned long long int* BaseCryptoRandomStream::Get64AddressPosition(unsigned long long int pos) {
 
@@ -377,7 +378,7 @@ namespace DiceLockSecurity {
 			return (unsigned long long int *)(&(this->cryptoStream[pos * sizeof(unsigned long long int)]));
 	}
 
-	// Gets the baseCryptoRandomStream portion at specified postion with
+	// Gets the baseCryptoRandomStream portion at specified postion with 
 	// from baseCryptoRandomStream object, position and length based in array of unsigned char
 	void BaseCryptoRandomStream::GetUCSubRandomStream(BaseCryptoRandomStream* subStream, unsigned long int pos) {
 
@@ -432,7 +433,7 @@ namespace DiceLockSecurity {
 	}
 
 
-	// Gets the baseCryptoRandomStream portion at specified postion with a specified length
+	// Gets the baseCryptoRandomStream portion at specified postion with a specified length 
 	// from baseCryptoRandomStream object, position and length based in array of unsigned char
 	void BaseCryptoRandomStream::GetUCSubRandomStream(BaseCryptoRandomStream* subStream, unsigned long int pos, unsigned long int length) {
 
@@ -455,7 +456,7 @@ namespace DiceLockSecurity {
 		}
 	}
 
-	// Gets the baseCryptoRandomStream portion at specified postion with a specified length
+	// Gets the baseCryptoRandomStream portion at specified postion with a specified length 
 	// from baseCryptoRandomStream object, position and length based in array of unsigned short int
 	void BaseCryptoRandomStream::GetUSSubRandomStream(BaseCryptoRandomStream* subStream, unsigned long int pos, unsigned long int length) {
 
@@ -478,7 +479,7 @@ namespace DiceLockSecurity {
 		}
 	}
 
-	// Gets the baseCryptoRandomStream portion at specified postion with a specified length
+	// Gets the baseCryptoRandomStream portion at specified postion with a specified length 
 	// from baseCryptoRandomStream object, position and length based in array of unsigned long int
 	void BaseCryptoRandomStream::GetULSubRandomStream(BaseCryptoRandomStream* subStream, unsigned long int pos, unsigned long int length) {
 
@@ -501,81 +502,81 @@ namespace DiceLockSecurity {
 		}
 	}
 
-	// Reduces considered length of BaseCryptoRandomStream, real length is mantained,
-	// but any access to BaseCryptoRandomStream through the interface will be limited to
-	// the new considered length. BaseCryptoRandomStream will remain with its original
+	// Reduces considered length of BaseCryptoRandomStream, real length is mantained, 
+	// but any access to BaseCryptoRandomStream through the interface will be limited to 
+	// the new considered length. BaseCryptoRandomStream will remain with its original 
 	// length and using the specified memory.
 	// Reduces length in bits.
 	void BaseCryptoRandomStream::ReduceBitLength(unsigned long int value) {
 
 		if ( this->reducedBitLength ) {
-			this->reducedBitLength -= value;
+			this->reducedBitLength -= value; 
 		}
 		else {
 			this->reducedBitLength = this->bitLength - value;
 		}
 	}
 
-	// Reduces considered length of BaseCryptoRandomStream, real length is mantained,
-	// but any access to BaseCryptoRandomStream through the interface will be limited to
-	// the new considered length. BaseCryptoRandomStream will remain with its original
+	// Reduces considered length of BaseCryptoRandomStream, real length is mantained, 
+	// but any access to BaseCryptoRandomStream through the interface will be limited to 
+	// the new considered length. BaseCryptoRandomStream will remain with its original 
 	// length and using the specified memory.
 	// Reduces length in unsigned chars.
 	void BaseCryptoRandomStream::ReduceUCLength(unsigned long int value) {
 
 		if ( this->reducedBitLength ) {
-			this->reducedBitLength -= (value * BYTEBITS);
+			this->reducedBitLength -= (value * BYTEBITS); 
 		}
 		else {
 			this->reducedBitLength = this->bitLength - (value * BYTEBITS);
 		}
 	}
 
-	// Reduces considered length of BaseCryptoRandomStream, real length is mantained,
-	// but any access to BaseCryptoRandomStream through the interface will be limited to
-	// the new considered length. BaseCryptoRandomStream will remain with its original
+	// Reduces considered length of BaseCryptoRandomStream, real length is mantained, 
+	// but any access to BaseCryptoRandomStream through the interface will be limited to 
+	// the new considered length. BaseCryptoRandomStream will remain with its original 
 	// length and using the specified memory.
 	// Reduces length in unsigned short ints.
 	void BaseCryptoRandomStream::ReduceUSLength(unsigned long int value) {
 
 		if ( this->reducedBitLength ) {
-			this->reducedBitLength -= (value * BYTEBITS * sizeof(unsigned short int));
+			this->reducedBitLength -= (value * BYTEBITS * sizeof(unsigned short int)); 
 		}
 		else {
 			this->reducedBitLength = this->bitLength - (value * BYTEBITS * sizeof(unsigned short int));
 		}
 	}
 
-	// Reduces considered length of BaseCryptoRandomStream, real length is mantained,
-	// but any access to BaseCryptoRandomStream through the interface will be limited to
-	// the new considered length. BaseCryptoRandomStream will remain with its original
+	// Reduces considered length of BaseCryptoRandomStream, real length is mantained, 
+	// but any access to BaseCryptoRandomStream through the interface will be limited to 
+	// the new considered length. BaseCryptoRandomStream will remain with its original 
 	// length and using the specified memory.
 	// Reduces length in unsigned long ints.
 	void BaseCryptoRandomStream::ReduceULLength(unsigned long int value) {
 
 		if ( this->reducedBitLength ) {
-			this->reducedBitLength -= (value * BYTEBITS * sizeof(unsigned long int));
+			this->reducedBitLength -= (value * BYTEBITS * sizeof(unsigned long int)); 
 		}
 		else {
 			this->reducedBitLength = this->bitLength - (value * BYTEBITS * sizeof(unsigned long int));
 		}
 	}
 
-	// Indicates if BaseCryptoRandomStream's length has been reduced in a
+	// Indicates if BaseCryptoRandomStream's length has been reduced in a 
 	// fictitious way
 	bool BaseCryptoRandomStream::ReducedLength(void) {
 		return (this->reducedBitLength != 0);
 	}
 
 
-	// Restores original length of BaseCryptoRandomStream and removes any
-	// fictitious reduced length
+	// Restores original length of BaseCryptoRandomStream and removes any 
+	// fictitious reduced length 
 	void BaseCryptoRandomStream::RestoreLength(void) {
 
 		this->reducedBitLength = 0;
 	}
 
-	// Operator equal, compares the BaseCryptoRandomStream object with the
+	// Operator equal, compares the BaseCryptoRandomStream object with the 
 	// BaseCryptoRandomStream parameter
 	bool BaseCryptoRandomStream::Equals(BaseCryptoRandomStream* otherStream) {
 

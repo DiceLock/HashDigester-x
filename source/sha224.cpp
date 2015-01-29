@@ -1,8 +1,8 @@
 //
 // Creator:    http://www.dicelocksecurity.com
-// Version:    vers.4.0.0.1
+// Version:    vers.5.0.0.1
 //
-// Copyright � 2009-2010 DiceLock Security, LLC. All rigths reserved.
+// Copyright 2009-2011 DiceLock Security, LLC. All rights reserved.
 //
 //                               DISCLAIMER
 //
@@ -16,15 +16,16 @@
 // WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
 // OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 // ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-//
+// 
 // DICELOCK IS A REGISTERED TRADEMARK OR TRADEMARK OF THE OWNERS.
-//
+// 
 
+#include <memory.h>
 #include "sha224.h"
 
 
 namespace DiceLockSecurity {
-
+	
   namespace Hash {
 
 	// Hash Algorithms Class enumerator name
@@ -39,18 +40,18 @@ namespace DiceLockSecurity {
 	// Number of hash unsigned long ints
 	const unsigned short int Sha224::hashULs = SHA224_DIGESTULONGS;
 
-	// Initial hash values of SHA224
-	const unsigned long int Sha224::initials[SHA256_DIGESTULONGS] =
-			{0xc1059ed8,
-             0x367cd507,
-             0x3070dd17,
-             0xf70e5939,
-             0xffc00b31,
-             0x68581511,
-             0x64f98fa7,
+	// Initial hash values of SHA224 
+	const unsigned long int Sha224::initials[SHA256_DIGESTULONGS] = 
+			{0xc1059ed8, 
+             0x367cd507, 
+             0x3070dd17, 
+             0xf70e5939, 
+             0xffc00b31, 
+             0x68581511, 
+             0x64f98fa7, 
 			 0xbefa4fa4};
 
-	// Constructor, default
+	// Constructor, default 
 	Sha224::Sha224() {
 
 		this->workingDigest256 = NULL;
@@ -67,16 +68,34 @@ namespace DiceLockSecurity {
 		}
 	}
 
-	// Set the Working Digest  BaseCryptoRandomStream for underlaying SHA256 algorithm
+	// Set the Working Digest BaseCryptoRandomStream for underlaying SHA256 algorithm
 	void Sha224::SetWorkingDigest(BaseCryptoRandomStream* workDigest) {
 
-		this->workingDigest256 = (DefaultCryptoRandomStream *)workDigest;
+		this->workingDigest256 = workDigest;
 	}
 
-	// Set the Working Digest  BaseCryptoRandomStream for underlaying SHA256 algorithm
+	// Get the Working Digest  BaseCryptoRandomStream for underlaying SHA256 algorithm length in bits
+	unsigned short int Sha224::GetWorkingDigestBitLength(void) {
+
+		return this->Sha256::GetBitHashLength();
+	}
+
+	// Get the Working Digest  BaseCryptoRandomStream for underlaying SHA256 algorithm length in unsigned chars
 	unsigned short int Sha224::GetWorkingDigestUCLength(void) {
 
 		return this->Sha256::GetUCHashLength();
+	}
+
+	// Get the Working Digest  BaseCryptoRandomStream for underlaying SHA256 algorithm length in unsigned short ints
+	unsigned short int Sha224::GetWorkingDigestUSLength(void) {
+
+		return this->Sha256::GetUSHashLength();
+	}
+
+	// Get the Working Digest  BaseCryptoRandomStream for underlaying SHA256 algorithm length in unsigned long ints
+	unsigned short int Sha224::GetWorkingDigestULLength(void) {
+
+		return this->Sha256::GetULHashLength();
 	}
 
 	// Initializes common states of Sha1 algorithm
@@ -108,16 +127,16 @@ namespace DiceLockSecurity {
 
 		// If bytes left from previous added stream, then they will be processed now with added data from new stream
 		if (this->remainingBytesLength) {
-			if ((this->remainingBytesLength + stream->GetUCLength()) > ((unsigned long int)this->GetDataHashUCs() - 1)) {
+			if ((this->remainingBytesLength + stream->GetUCLength()) > ((unsigned long int)this->GetUCHashBlockLength() - 1)) {
 				// Setting the point to start the current stream processed
-				startStreamByte = this->GetDataHashUCs() - this->remainingBytesLength;
-				processBytes = stream->GetUCLength() - (this->GetDataHashUCs() - this->remainingBytesLength);
+				startStreamByte = this->GetUCHashBlockLength() - this->remainingBytesLength;
+				processBytes = stream->GetUCLength() - (this->GetUCHashBlockLength() - this->remainingBytesLength);
 
-				memcpy(this->remainingBytes + this->remainingBytesLength, stream->GetUCAddressPosition(0), this->GetDataHashUCs() - this->remainingBytesLength);
+				memcpy(this->remainingBytes + this->remainingBytesLength, stream->GetUCAddressPosition(0), this->GetUCHashBlockLength() - this->remainingBytesLength);
 				// Process remaining bytes of previous streams adn 64 byte padding of current stream
 				this->Compress(this->workingDigest256, this->remainingBytes);
 				// Updating message byt length processed
-				this->AddMessageLength(this->GetDataHashUCs());
+				this->AddMessageLength(this->GetUCHashBlockLength());
 				// Remaining bytes of previous strema set to 0
 				this->remainingBytesLength = 0;
 			}
@@ -130,12 +149,12 @@ namespace DiceLockSecurity {
 			startStreamByte = 0;
 		}
 
-		for (numBytes = 0; processBytes > ((unsigned long int)this->GetDataHashUCs() - 1); numBytes += this->GetDataHashUCs()) {
+		for (numBytes = 0; processBytes > ((unsigned long int)this->GetUCHashBlockLength() - 1); numBytes += this->GetUCHashBlockLength()) {
 			// Process the chunk
 			this->Compress(this->workingDigest256, stream->GetUCAddressPosition(startStreamByte + numBytes));
 			// Updating message byt length processed
-			this->AddMessageLength(this->GetDataHashUCs());
-			processBytes -= this->GetDataHashUCs();
+			this->AddMessageLength(this->GetUCHashBlockLength()); 
+			processBytes -= this->GetUCHashBlockLength();
 		}
 
 		// If remaining bytes left, they will be copied for the next added stream
@@ -153,18 +172,17 @@ namespace DiceLockSecurity {
 		unsigned short int i;
 
 		this->remainingBytes[this->remainingBytesLength] = 0x80;
-		if ((this->remainingBytesLength * BYTEBITS) % this->dataHashBits >= this->equationModulo) {
-			memset(this->remainingBytes + this->remainingBytesLength + 1, 0, this->GetDataHashUCs() - this->remainingBytesLength -1);
+		if ((this->remainingBytesLength * BYTEBITS) % this->hashBlockBits >= this->equationModulo) {
+			memset(this->remainingBytes + this->remainingBytesLength + 1, 0, this->GetUCHashBlockLength() - this->remainingBytesLength -1);
 			this->Compress(this->workingDigest256, this->remainingBytes);
 			this->AddMessageLength(this->remainingBytesLength);
-			int i; i=this->GetDataHashUCs();
-			memset(this->remainingBytes, 0, this->GetDataHashUCs());
+			memset(this->remainingBytes, 0, this->GetUCHashBlockLength());
 			this->remainingBytesLength = 0;
 		}
 		else {
-			memset(this->remainingBytes + this->remainingBytesLength + 1, 0, this->GetDataHashUCs() - this->remainingBytesLength -1);
+			memset(this->remainingBytes + this->remainingBytesLength + 1, 0, this->GetUCHashBlockLength() - this->remainingBytesLength -1);
 		}
-		this->AddMessageLength(this->remainingBytesLength);
+		this->AddMessageLength(this->remainingBytesLength); 
 		this->remainingBytes[56] = (this->messageBitLengthHigh >> 24) & 255;
 		this->remainingBytes[57] = (this->messageBitLengthHigh >> 16) & 255;
 		this->remainingBytes[58] = (this->messageBitLengthHigh >> 8) & 255;
@@ -177,6 +195,7 @@ namespace DiceLockSecurity {
 		for (i = 0; i < this->GetULHashLength(); i++) {
 			this->messageDigest->SetULPosition(i, this->workingDigest256->GetULPosition(i));
 		}
+		this->SwapLittleEndian();
 	}
 
 	// Gets hash length in bits

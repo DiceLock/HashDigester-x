@@ -1,8 +1,8 @@
 //
 // Creator:    http://www.dicelocksecurity.com
-// Version:    vers.4.0.0.1
+// Version:    vers.5.0.0.1
 //
-// Copyright � 2009-2010 DiceLock Security, LLC. All rigths reserved.
+// Copyright 2009-2011 DiceLock Security, LLC. All rights reserved.
 //
 //                               DISCLAIMER
 //
@@ -16,16 +16,27 @@
 // WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
 // OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 // ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-//
+// 
 // DICELOCK IS A REGISTERED TRADEMARK OR TRADEMARK OF THE OWNERS.
-//
+// 
 
+#include <memory.h>
+#include <stdlib.h>
 #include "baseRipemd.h"
 
 
 namespace DiceLockSecurity {
-
+	
   namespace Hash {
+
+	// Number of data bits to compute hash
+	const unsigned short int BaseRipemd::hashBlockBits = RIPEMD_BLOCKBITS;
+	// Number of data unsigned chars to compute hash
+	const unsigned short int BaseRipemd::hashBlockUCs = RIPEMD_BLOCKUCHARS;
+	// Number of data unsigned long shorts to compute hash
+	const unsigned short int BaseRipemd::hashBlockUSs = RIPEMD_BLOCKUSHORTS;
+	// Number of data unsigned long ints to compute hash
+	const unsigned short int BaseRipemd::hashBlockULs = RIPEMD_BLOCKULONGS;
 
 	// Constants for all RIPEMD algorithms
 	const unsigned long int BaseRipemd::constant0 = 0x00000000UL;
@@ -42,7 +53,7 @@ namespace DiceLockSecurity {
 	const unsigned short int BaseRipemd::rl_16_31[16] = {7, 6, 8, 13, 11, 9, 7, 15, 7, 12, 15, 9, 11, 7, 13, 12};
 	const unsigned short int BaseRipemd::rl_32_47[16] = {11, 13, 6, 7, 14, 9, 13, 15, 14, 8, 13, 6, 5, 12, 7, 5};
 	const unsigned short int BaseRipemd::rl_48_63[16] = {11, 12, 14, 15, 14, 15, 9, 8, 9, 14, 5, 6, 8, 6, 5, 12};
-	// Amounts of prime rotate left
+	// Amounts of prime rotate left 
 	const unsigned short int BaseRipemd::prime_rl_0_15[16] = {8, 9, 9, 11, 13, 15, 15, 5, 7, 7, 8, 11, 14, 14, 12, 6};
 	const unsigned short int BaseRipemd::prime_rl_16_31[16] = {9, 13, 15, 7, 12, 8, 9, 11, 7, 7, 12, 7, 6, 15, 13, 11};
 	const unsigned short int BaseRipemd::prime_rl_32_47[16] = {9, 7, 15, 11, 8, 6, 6, 14, 12, 13, 5, 14, 13, 13, 7, 5};
@@ -71,7 +82,7 @@ namespace DiceLockSecurity {
 		this->messageByteLengthLow = 0;
 	}
 
-	// Initializes common states of all Ripmed algorithms
+	// Initializes common states of all Ripmed algorithms  
 	void BaseRipemd::Initialize() {
 
 		this->messageDigest->SetULPosition(0, inistate0);
@@ -83,7 +94,7 @@ namespace DiceLockSecurity {
 		this->messageByteLengthLow = 0;
 	}
 
-	// Computes the 64 byte chunk of stream information
+	// Computes the 64 byte chunk of stream information 
 	void BaseRipemd::Add(BaseCryptoRandomStream* stream) {
 		unsigned long int chunk[RIPEMD_DATAULONGS];
 		unsigned long int startStreamByte = 0, numBytes = 0, processBytes = 0;
@@ -126,7 +137,7 @@ namespace DiceLockSecurity {
 			}
 			this->Compress(chunk);
 			// Updating message byt length processed
-			this->AddMessageLength(RIPEMD_DATAUCHARS);
+			this->AddMessageLength(RIPEMD_DATAUCHARS); 
 		}
 
 		// If remaining bytes left, they will be copied for the next added stream
@@ -179,10 +190,35 @@ namespace DiceLockSecurity {
 	// of another usigned long to store overflow
 	void BaseRipemd::AddMessageLength(unsigned long int byteLength) {
 
-		if ((this->messageByteLengthLow + byteLength) < this->messageByteLengthLow)
+		if ((this->messageByteLengthLow + byteLength) < this->messageByteLengthLow) 
 			// add overflow of unsigned long
 			this->messageByteLengthHigh++;
 		this->messageByteLengthLow += byteLength;
 	}
-  }
+ 
+	// Gets the number of bits in the hash block to be hashed
+	unsigned short int BaseRipemd::GetBitHashBlockLength(void) {
+
+		return this->hashBlockBits;
+	}
+
+	// Gets the number of unsigned chars in the hash block to be hashed
+	unsigned short int BaseRipemd::GetUCHashBlockLength(void) {
+
+		return this->hashBlockUCs;
+	}
+
+	// Gets the number of unsigned short ints in the hash block to be hashed
+	unsigned short int BaseRipemd::GetUSHashBlockLength(void) {
+
+		return this->hashBlockUSs;
+	}
+
+	// Gets the number of unsigned long ints in the hash block to be hashed
+	unsigned short int BaseRipemd::GetULHashBlockLength(void) {
+
+		return this->hashBlockULs;
+	}
+
+ }
 }

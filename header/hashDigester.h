@@ -1,8 +1,8 @@
 //
 // Creator:    http://www.dicelocksecurity.com
-// Version:    vers.4.0.0.1
+// Version:    vers.5.0.0.1
 //
-// Copyright � 2009-2010 DiceLock Security, LLC. All rigths reserved.
+// Copyright 2009-2011 DiceLock Security, LLC. All rights reserved.
 //
 //                               DISCLAIMER
 //
@@ -16,9 +16,35 @@
 // WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
 // OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 // ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-//
+// 
 // DICELOCK IS A REGISTERED TRADEMARK OR TRADEMARK OF THE OWNERS.
-//
+// 
+
+/*! \mainpage HashDigester-x 5.0.0.1 Documentation
+ *
+ * \section intro_sec HashDigester-x implements Hash algorithms, hash digest geneartors, for Linux operating systems
+ *
+ *     HashDigester-x implements the following hash algorithms
+ *
+ *     - Secure Hash Algorithm 1, Sha 1
+ *
+ *     - Secure Hash Algorithm 224, Sha 224
+ *
+ *     - Secure Hash Algorithm 256, Sha 256
+ *
+ *     - Secure Hash Algorithm 384, Sha 384
+ *
+ *     - Secure Hash Algorithm 512, Sha 512
+ *
+ *     - Ripemd 128
+ *
+ *     - Ripemd 160
+ *
+ *     - Ripemd 256
+ *
+ *     - Ripemd 320
+ *
+ */
 
 #ifndef HASHDIGESTER_HPP
 

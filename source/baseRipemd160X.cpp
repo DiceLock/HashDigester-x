@@ -1,8 +1,8 @@
 //
 // Creator:    http://www.dicelocksecurity.com
-// Version:    vers.4.0.0.1
+// Version:    vers.5.0.0.1
 //
-// Copyright � 2009-2010 DiceLock Security, LLC. All rigths reserved.
+// Copyright 2009-2011 DiceLock Security, LLC. All rights reserved.
 //
 //                               DISCLAIMER
 //
@@ -16,15 +16,15 @@
 // WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
 // OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 // ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-//
+// 
 // DICELOCK IS A REGISTERED TRADEMARK OR TRADEMARK OF THE OWNERS.
-//
+// 
 
 #include "baseRipemd160X.h"
 
 
 namespace DiceLockSecurity {
-
+	
   namespace Hash {
 
 	// Constants for 160 and 320 RIPEMD algorithms
@@ -33,7 +33,7 @@ namespace DiceLockSecurity {
 
 	// Amounts of rotate left
 	const unsigned short int BaseRipemd160X::rl_64_79[16] = {9, 15, 5, 11, 6, 8, 13, 12, 5, 12, 13, 14, 11, 8, 5, 6};
-	// Amounts of prime rotate left
+	// Amounts of prime rotate left 
 	const unsigned short int BaseRipemd160X::prime_rl_64_79[16] = {8, 5, 12, 9, 12, 5, 14, 6, 8, 13, 6, 5, 15, 13, 11, 11};
 
 	// Initial states of Ripemd 160 and 320 algorithms

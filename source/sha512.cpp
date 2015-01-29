@@ -1,8 +1,8 @@
 //
 // Creator:    http://www.dicelocksecurity.com
-// Version:    vers.4.0.0.1
+// Version:    vers.5.0.0.1
 //
-// Copyright � 2009-2010 DiceLock Security, LLC. All rigths reserved.
+// Copyright 2009-2011 DiceLock Security, LLC. All rights reserved.
 //
 //                               DISCLAIMER
 //
@@ -16,10 +16,11 @@
 // WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
 // OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 // ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-//
+// 
 // DICELOCK IS A REGISTERED TRADEMARK OR TRADEMARK OF THE OWNERS.
-//
+// 
 
+#include <memory.h>
 #include <stdlib.h>
 #include "sha512.h"
 
@@ -54,7 +55,7 @@
 
 
 namespace DiceLockSecurity {
-
+	
   namespace Hash {
 
 	// Hash Algorithms Class enumerator name
@@ -71,14 +72,16 @@ namespace DiceLockSecurity {
 	// Number of hash unsigned 64 bits
 	const unsigned short int Sha512::hash64s = SHA512_DIGESTULG64S;
 
-		// Number of data bits to compute hash
-	const unsigned short int Sha512::dataHashBits = SHA512_DATABITS;
-	// Number of data unsigned chars to compute hash
-	const unsigned short int Sha512::dataHashUCs = SHA512_DATAUCHARS;
-	// Number of data unsigned long integers to compute hash
-	const unsigned short int Sha512::dataHashULs = SHA512_DATAULONGS;
-	// Number of data unsigned long integers to compute hash
-	const unsigned short int Sha512::dataHash64s = SHA512_DATAULG64S;
+	// Number of block bits to compute hash
+	const unsigned short int Sha512::hashBlockBits = SHA512_BLOCKBITS;
+	// Number of block unsigned chars to compute hash
+	const unsigned short int Sha512::hashBlockUCs = SHA512_BLOCKUCHARS;
+	// Number of block unsigned short ints to compute hash
+	const unsigned short int Sha512::hashBlockUSs = SHA512_BLOCKUSHORTS;
+	// Number of block unsigned long integers to compute hash
+	const unsigned short int Sha512::hashBlockULs = SHA512_BLOCKULONGS;
+	// Number of block unsigned long integers to compute hash
+	const unsigned short int Sha512::hashBlock64s = SHA512_BLOCKULG64S;
 
 	// Equation modulo constant value
 	const unsigned short int Sha512::equationModulo = SHA512_EQUATIONMODULO;
@@ -86,19 +89,19 @@ namespace DiceLockSecurity {
 	// Number of schedule words
 	const unsigned short int Sha512::scheduleNumber = SHA512_MESSAGESCHEDULE;
 
-	// Initial hash values of SHA1
-	const unsigned long long int Sha512::initials[SHA512_DIGESTULONGS] =
-			{0x6a09e667f3bcc908,
-             0xbb67ae8584caa73b,
-             0x3c6ef372fe94f82b,
-             0xa54ff53a5f1d36f1,
-             0x510e527fade682d1,
-             0x9b05688c2b3e6c1f,
-             0x1f83d9abfb41bd6b,
+	// Initial hash values of SHA1 
+	const unsigned long long int Sha512::initials[SHA512_DIGESTULONGS] = 
+			{0x6a09e667f3bcc908, 
+             0xbb67ae8584caa73b, 
+             0x3c6ef372fe94f82b, 
+             0xa54ff53a5f1d36f1, 
+             0x510e527fade682d1, 
+             0x9b05688c2b3e6c1f, 
+             0x1f83d9abfb41bd6b, 
 			 0x5be0cd19137e2179};
 
-	// Computational constant values of SHA1
-	const unsigned long long int Sha512::constants[SHA512_COMPUTECONSTANTS] =
+	// Computational constant values of SHA1 
+	const unsigned long long int Sha512::constants[SHA512_COMPUTECONSTANTS] = 
 			 {0x428a2f98d728ae22, 0x7137449123ef65cd, 0xb5c0fbcfec4d3b2f, 0xe9b5dba58189dbbc,
               0x3956c25bf348b538, 0x59f111f1b605d019, 0x923f82a4af194f9b, 0xab1c5ed5da6d8118,
               0xd807aa98a3030242, 0x12835b0145706fbe, 0x243185be4ee4b28c, 0x550c7dc3d5ffb4e2,
@@ -120,23 +123,17 @@ namespace DiceLockSecurity {
               0x28db77f523047d84, 0x32caab7b40c72493, 0x3c9ebe0a15c9bebc, 0x431d67c49c100d4c,
 			  0x4cc5d4becb3e42b6, 0x597f299cfc657e2a, 0x5fcb6fab3ad6faec, 0x6c44198c4a475817};
 
-	// Gets the number of unsigned chars in the hash block to be hashed
-	unsigned short int Sha512::GetDataHashUCs(void) {
-
-		return this->dataHashUCs;
-	}
-
 	// Adds messaage length processed, if it is greater than unsigned long makes use
 	// of another usigned long to store overflow
 	void Sha512::AddMessageLength(unsigned long int byteLength) {
 
-		if ((this->messageBitLengthLow + (byteLength * BYTEBITS)) < this->messageBitLengthLow)
+		if ((this->messageBitLengthLow + (byteLength * BYTEBITS)) < this->messageBitLengthLow) 
 			// add overflow of unsigned long
 			this->messageBitLengthHigh++;
 		this->messageBitLengthLow += (byteLength  * BYTEBITS);
 	}
 
-	// Computes the chunk block of information
+	// Computes the chunk block of information  
 	void Sha512::Compress(BaseCryptoRandomStream* digest, unsigned char* stream) {
 		unsigned long long int a, b, c, d, e, f, g, h, temp1, temp2;
 		unsigned short int i;
@@ -151,11 +148,11 @@ namespace DiceLockSecurity {
 		g = digest->Get64Position(6);
 		h = digest->Get64Position(7);
 
-		for (i = 0; i < this->dataHash64s; i++) {
-			messageSchedule[i] = (((unsigned long long int )stream[i*8]) << 56) | (((unsigned long long int )stream[i*8+1]) << 48)
-							   | (((unsigned long long int )stream[i*8+2]) << 40) | (((unsigned long long int )stream[i*8+3]) << 32)
-							   | (((unsigned long long int )stream[i*8+4]) << 24) | (((unsigned long long int )stream[i*8+5]) << 16)
-							   | (((unsigned long long int )stream[i*8+6]) << 8) | (((unsigned long long int )stream[i*8+7]));
+		for (i = 0; i < this->hashBlock64s; i++) {
+			messageSchedule[i] = (((unsigned long long int)stream[i*8]) << 56) | (((unsigned long long int)stream[i*8+1]) << 48) 
+							   | (((unsigned long long int)stream[i*8+2]) << 40) | (((unsigned long long int)stream[i*8+3]) << 32)  
+							   | (((unsigned long long int)stream[i*8+4]) << 24) | (((unsigned long long int)stream[i*8+5]) << 16) 
+							   | (((unsigned long long int)stream[i*8+6]) << 8) | (((unsigned long long int)stream[i*8+7]));
 		}
 
 		//  0 <= t <= 19
@@ -179,7 +176,26 @@ namespace DiceLockSecurity {
 
 	}
 
-	// Constructor, default
+	// Swap bytes for little endian
+	void Sha512::SwapLittleEndian(void) {
+		unsigned long long int  swap;
+		unsigned long int i;
+
+		for ( i = 0; i < this->messageDigest->GetULLength()/2; i++ ) {
+			swap = this->messageDigest->Get64Position(i);
+			this->messageDigest->SetUCPosition( (i * 8), (unsigned char)(swap >> 56) & 0xFF);
+			this->messageDigest->SetUCPosition( (i * 8) + 1, (unsigned char)(swap >> 48) & 0xFF);
+			this->messageDigest->SetUCPosition( (i * 8) + 2, (unsigned char)(swap >> 40) & 0xFF);
+			this->messageDigest->SetUCPosition( (i * 8) + 3, (unsigned char)(swap >> 32) & 0xFF);
+			this->messageDigest->SetUCPosition( (i * 8) + 4, (unsigned char)(swap >> 24) & 0xFF);
+			this->messageDigest->SetUCPosition( (i * 8) + 5, (unsigned char)(swap >> 16) & 0xFF);
+			this->messageDigest->SetUCPosition( (i * 8) + 6, (unsigned char)(swap >> 8) & 0xFF);
+			this->messageDigest->SetUCPosition( (i * 8) + 7, (unsigned char)swap & 0xFF);
+		}
+
+	}
+
+	// Constructor, default 
 	Sha512::Sha512() {
 	}
 
@@ -210,16 +226,16 @@ namespace DiceLockSecurity {
 
 		// If bytes left from previous added stream, then they will be processed now with added data from new stream
 		if (this->remainingBytesLength) {
-			if ((this->remainingBytesLength + stream->GetUCLength()) > ((unsigned long int)this->GetDataHashUCs() - 1)) {
+			if ((this->remainingBytesLength + stream->GetUCLength()) > ((unsigned long int)this->GetUCHashBlockLength() - 1)) {
 				// Setting the point to start the current stream processed
-				startStreamByte = this->GetDataHashUCs() - this->remainingBytesLength;
-				processBytes = stream->GetUCLength() - (this->GetDataHashUCs() - this->remainingBytesLength);
+				startStreamByte = this->GetUCHashBlockLength() - this->remainingBytesLength;
+				processBytes = stream->GetUCLength() - (this->GetUCHashBlockLength() - this->remainingBytesLength);
 
-				memcpy(this->remainingBytes + this->remainingBytesLength, stream->GetUCAddressPosition(0), this->GetDataHashUCs() - this->remainingBytesLength);
+				memcpy(this->remainingBytes + this->remainingBytesLength, stream->GetUCAddressPosition(0), this->GetUCHashBlockLength() - this->remainingBytesLength);
 				// Process remaining bytes of previous streams adn 64 byte padding of current stream
 				this->Compress(this->messageDigest, this->remainingBytes);
 				// Updating message byt length processed
-				this->AddMessageLength(this->GetDataHashUCs());
+				this->AddMessageLength(this->GetUCHashBlockLength());
 				// Remaining bytes of previous strema set to 0
 				this->remainingBytesLength = 0;
 			}
@@ -232,12 +248,12 @@ namespace DiceLockSecurity {
 			startStreamByte = 0;
 		}
 
-		for (numBytes = 0; processBytes > ((unsigned long int)this->GetDataHashUCs() - 1); numBytes += this->GetDataHashUCs()) {
+		for (numBytes = 0; processBytes > ((unsigned long int)this->GetUCHashBlockLength() - 1); numBytes += this->GetUCHashBlockLength()) {
 			// Process the chunk
 			this->Compress(this->messageDigest, stream->GetUCAddressPosition(startStreamByte + numBytes));
 			// Updating message byt length processed
-			this->AddMessageLength(this->GetDataHashUCs());
-			processBytes -= this->GetDataHashUCs();
+			this->AddMessageLength(this->GetUCHashBlockLength()); 
+			processBytes -= this->GetUCHashBlockLength();
 		}
 
 		// If remaining bytes left, they will be copied for the next added stream
@@ -251,18 +267,17 @@ namespace DiceLockSecurity {
 	void Sha512::Finalize(void) {
 
 		this->remainingBytes[this->remainingBytesLength] = 0x80;
-		if ((this->remainingBytesLength * BYTEBITS) % this->dataHashBits >= this->equationModulo) {
-			memset(this->remainingBytes + this->remainingBytesLength + 1, 0, this->GetDataHashUCs() - this->remainingBytesLength -1);
+		if ((this->remainingBytesLength * BYTEBITS) % this->hashBlockBits >= this->equationModulo) {
+			memset(this->remainingBytes + this->remainingBytesLength + 1, 0, this->GetUCHashBlockLength() - this->remainingBytesLength -1);
 			this->Compress(this->messageDigest, this->remainingBytes);
 			this->AddMessageLength(this->remainingBytesLength);
-			int i; i=this->GetDataHashUCs();
-			memset(this->remainingBytes, 0, this->GetDataHashUCs());
+			memset(this->remainingBytes, 0, this->GetUCHashBlockLength());
 			this->remainingBytesLength = 0;
 		}
 		else {
-			memset(this->remainingBytes + this->remainingBytesLength + 1, 0, this->GetDataHashUCs() - this->remainingBytesLength -1);
+			memset(this->remainingBytes + this->remainingBytesLength + 1, 0, this->GetUCHashBlockLength() - this->remainingBytesLength -1);
 		}
-		this->AddMessageLength(this->remainingBytesLength);
+		this->AddMessageLength(this->remainingBytesLength); 
 		this->remainingBytes[112] = (((unsigned long long int)this->messageBitLengthHigh) >> 56) & 255;
 		this->remainingBytes[113] = (((unsigned long long int)this->messageBitLengthHigh) >> 48) & 255;
 		this->remainingBytes[114] = (((unsigned long long int)this->messageBitLengthHigh) >> 40) & 255;
@@ -280,6 +295,7 @@ namespace DiceLockSecurity {
 		this->remainingBytes[126] = (((unsigned long long int)this->messageBitLengthLow) >> 8) & 255;
 		this->remainingBytes[127] = (((unsigned long long int)this->messageBitLengthLow)) & 255;
 		this->Compress(this->messageDigest, this->remainingBytes);
+		this->SwapLittleEndian();
 	}
 
 	// Gets hash length in bits
@@ -312,11 +328,35 @@ namespace DiceLockSecurity {
 		return this->hash64s;
 	}
 
+	// Gets the number of bits in the hash block to be hashed
+	unsigned short int Sha512::GetBitHashBlockLength(void) {
+
+		return this->hashBlockBits;
+	}
+
+	// Gets the number of unsigned chars in the hash block to be hashed
+	unsigned short int Sha512::GetUCHashBlockLength(void) {
+
+		return this->hashBlockUCs;
+	}
+
+	// Gets the number of unsigned short ints in the hash block to be hashed
+	unsigned short int Sha512::GetUSHashBlockLength(void) {
+
+		return this->hashBlockUSs;
+	}
+
+	// Gets the number of unsigned long ints in the hash block to be hashed
+	unsigned short int Sha512::GetULHashBlockLength(void) {
+
+		return this->hashBlockULs;
+	}
+
 	// Gets the type of the object
 	Hashes Sha512::GetType(void) {
 
 		return this->hashName;
 	}
+
   }
 }
-

@@ -1,8 +1,8 @@
 //
 // Creator:    http://www.dicelocksecurity.com
-// Version:    vers.4.0.0.1
+// Version:    vers.5.0.0.1
 //
-// Copyright � 2009-2010 DiceLock Security, LLC. All rigths reserved.
+// Copyright 2009-2011 DiceLock Security, LLC. All rights reserved.
 //
 //                               DISCLAIMER
 //
@@ -16,14 +16,13 @@
 // WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
 // OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 // ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-//
+// 
 // DICELOCK IS A REGISTERED TRADEMARK OR TRADEMARK OF THE OWNERS.
-//
+// 
 
 #ifndef SHA384_HPP
 
 #define SHA384_HPP
-
 
 #include "sha512.h"
 #include "defaultCryptoRandomStream.h"
@@ -44,68 +43,77 @@ namespace DiceLockSecurity {
 
 		private:
 
-			// Hash Algorithms Class enumerator name
+			/// Hash Algorithms Class enumerator name
 			static const Hashes	hashName;
 
-			// Number of hash bits
+			/// Number of hash bits
 			static const unsigned short int hashBits;
-			// Number of hash unsigned chars
+			/// Number of hash unsigned chars
 			static const unsigned short int hashUCs;
-			// Number of hash unsigned short ints
+			/// Number of hash unsigned short ints
 			static const unsigned short int hashUSs;
-			// Number of hash unsigned long ints
+			/// Number of hash unsigned long ints
 			static const unsigned short int hashULs;
-			// Number of hash unsigned 64 bits
+			/// Number of hash unsigned 64 bits
 			static const unsigned short int hash64s;
 
-			// Initial hash values of SHA512
+			/// Initial hash values of SHA512 
 			static const unsigned long long int initials[SHA384_DIGESTULONGS];
 
-			// Pointer to DefaultCryptoRandomStream digest for SHA 384 hash algorithm
-			DefaultCryptoRandomStream* workingDigest512;
-
-			// Boolean pointing if meesaageDigest for SHA 512 has been created automatically
+			/// Pointer to BaseCryptoRandomStream digest for SHA 384 hash algorithm
+			BaseCryptoRandomStream* workingDigest512; 
+			
+			/// Boolean pointing if meesaageDigest for SHA 512 has been created automatically
 			bool autoWorkingDigest;
-
+			
 		public:
 
-			// Constructor, default
+			/// Constructor, default 
 			Sha384();
 
-			// Destructor
+			/// Destructor
 			~Sha384();
 
-			// Set the Working Digest  BaseCryptoRandomStream for underlaying SHA512 algorithm
+			/// Set the Working Digest  BaseCryptoRandomStream for underlaying SHA512 algorithm
 			void SetWorkingDigest(BaseCryptoRandomStream*);
 
-			// Set the Working Digest  BaseCryptoRandomStream for underlaying SHA512 algorithm
+			/// Get the Working Digest  BaseCryptoRandomStream for underlaying SHA512 algorithm length in bits
+			unsigned short int GetWorkingDigestBitLength(void);
+
+			/// Get the Working Digest  BaseCryptoRandomStream for underlaying SHA512 algorithm length in unsigned chars
 			unsigned short int GetWorkingDigestUCLength(void);
 
-			// Initializes common states of Sha1 algorithm
+			/// Get the Working Digest  BaseCryptoRandomStream for underlaying SHA512 algorithm length in unsigned short ints
+			unsigned short int GetWorkingDigestUSLength(void);
+
+			/// Get the Working Digest  BaseCryptoRandomStream for underlaying SHA512 algorithm length in unsigned long ints
+			unsigned short int GetWorkingDigestULLength(void);
+
+			/// Initializes common states of Sha1 algorithm
 			void Initialize(void);
 
-			// Adds the BaseCryptoRandomStream to the hash
+			/// Adds the BaseCryptoRandomStream to the hash
 			void Add(BaseCryptoRandomStream*);
 
-			// Finalize the hash
+			/// Finalize the hash
 			void Finalize(void);
 
-			// Gets hash length in bits
+			/// Gets hash length in bits
 			unsigned short int GetBitHashLength(void);
 
-			// Gets hash length in unsigned chars
+			/// Gets hash length in unsigned chars
 			unsigned short int GetUCHashLength(void);
 
-			// Gets hash length in unsigned short ints
+			/// Gets hash length in unsigned short ints
 			unsigned short int GetUSHashLength(void);
 
-			// Gets hash length in unsigned long ints
+			/// Gets hash length in unsigned long ints
 			unsigned short int GetULHashLength(void);
 
-			// Gets hash length in unsigned 64 bits
+			/// Gets hash length in unsigned 64 bits
 			unsigned short int Get64HashLength(void);
 
-			// Gets the type of the object
+			/// Gets the type of the object
 			Hashes GetType(void);
 	};
   }

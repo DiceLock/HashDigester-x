@@ -1,8 +1,8 @@
 //
 // Creator:    http://www.dicelocksecurity.com
-// Version:    vers.4.0.0.1
+// Version:    vers.5.0.0.1
 //
-// Copyright � 2009-2010 DiceLock Security, LLC. All rigths reserved.
+// Copyright 2009-2011 DiceLock Security, LLC. All rights reserved.
 //
 //                               DISCLAIMER
 //
@@ -16,10 +16,11 @@
 // WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
 // OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 // ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-//
+// 
 // DICELOCK IS A REGISTERED TRADEMARK OR TRADEMARK OF THE OWNERS.
-//
+// 
 
+#include <memory.h>
 #include "sha1.h"
 
 
@@ -42,7 +43,7 @@
 
 
 namespace DiceLockSecurity {
-
+	
   namespace Hash {
 
 	// Hash Algorithms Class enumerator name
@@ -60,20 +61,20 @@ namespace DiceLockSecurity {
 	// Number of schedule words
 	const unsigned short int Sha1::scheduleNumber = SHA1_MESSAGESCHEDULE;
 
-	// Initial hash values of SHA1
-	const unsigned long int Sha1::initials[SHA1_DIGESTULONGS] = {0x67452301UL,
-																0xefcdab89UL,
-																0x98badcfeUL,
-																0x10325476UL,
+	// Initial hash values of SHA1 
+	const unsigned long int Sha1::initials[SHA1_DIGESTULONGS] = {0x67452301UL, 
+																0xefcdab89UL, 
+																0x98badcfeUL, 
+																0x10325476UL, 
 																0xc3d2e1f0UL};
 
-	// Computational constant values of SHA1
-	const unsigned long int Sha1::constants[SHA1_COMPUTECONSTANTS] = {0x5a827999UL,
-																	0x6ed9eba1UL,
-																	0x8f1bbcdcUL,
+	// Computational constant values of SHA1 
+	const unsigned long int Sha1::constants[SHA1_COMPUTECONSTANTS] = {0x5a827999UL, 
+																	0x6ed9eba1UL, 
+																	0x8f1bbcdcUL, 
 																	0xca62c1d6UL};
 
-	// Computes the chunk block of information
+	// Computes the chunk block of information  
 	void Sha1::Compress(BaseCryptoRandomStream* digest, unsigned char* stream) {
 		unsigned long int a, b, c, d, e, temp;
 		unsigned short int i;
@@ -85,7 +86,7 @@ namespace DiceLockSecurity {
 		d = digest->GetULPosition(3);
 		e = digest->GetULPosition(4);
 
-		for (i = 0; i < this->dataHashULs; i++) {
+		for (i = 0; i < this->hashBlockULs; i++) {
 			messageSchedule[i] = (stream[i*4] << 24) | (stream[i*4+1] << 16) | (stream[i*4+2] << 8) | (stream[i*4+3]);
 		}
 
@@ -108,7 +109,6 @@ namespace DiceLockSecurity {
 		for (i = 60; i < SHA1_OPERATIONS; i++) {
 			SHA1_Operation_Tail(SHA1_Parity, &a, &b, &c, &d, &e, &temp, i, this->constants[3]);
 		}
-
 		// Upgrading hash values
 		digest->SetULPosition(0, digest->GetULPosition(0) + a);
 		digest->SetULPosition(1, digest->GetULPosition(1) + b);
@@ -117,7 +117,7 @@ namespace DiceLockSecurity {
 		digest->SetULPosition(4, digest->GetULPosition(4) + e);
 	}
 
-	// Constructor, default
+	// Constructor, default 
 	Sha1::Sha1() {
 	}
 
@@ -136,6 +136,13 @@ namespace DiceLockSecurity {
 		this->remainingBytesLength = 0;
 		this->messageBitLengthHigh = 0;
 		this->messageBitLengthLow = 0;
+	}
+
+	// Finalizes hash and performs little endian transformation
+	void Sha1::Finalize(void) {
+
+		this->BaseSha32::Finalize();
+		this->SwapLittleEndian();
 	}
 
 	// Gets hash length in bits

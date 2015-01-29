@@ -1,8 +1,8 @@
 //
 // Creator:    http://www.dicelocksecurity.com
-// Version:    vers.4.0.0.1
+// Version:    vers.5.0.0.1
 //
-// Copyright � 2009-2010 DiceLock Security, LLC. All rigths reserved.
+// Copyright 2009-2011 DiceLock Security, LLC. All rights reserved.
 //
 //                               DISCLAIMER
 //
@@ -16,14 +16,13 @@
 // WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
 // OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 // ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-//
+// 
 // DICELOCK IS A REGISTERED TRADEMARK OR TRADEMARK OF THE OWNERS.
-//
+// 
 
 #ifndef BASEHASH_HPP
 
 #define BASEHASH_HPP
-
 
 #include "baseCryptoRandomStream.h"
 
@@ -53,48 +52,60 @@ namespace DiceLockSecurity {
 
 		protected:
 
-			// Pointer to BaseCryptoRandomStream digest
-			BaseCryptoRandomStream* messageDigest;
+			/// Pointer to BaseCryptoRandomStream digest
+			BaseCryptoRandomStream* messageDigest; 
 
 		public:
 
-			// Constructor, default
+			/// Constructor, default 
 			BaseHash();
 
-			// Constructor assigning diggest BaseCryptoRandomStream
+			/// Constructor assigning diggest BaseCryptoRandomStream 
 			BaseHash(BaseCryptoRandomStream*);
 
-			// Destructor
+			/// Destructor
 			virtual ~BaseHash();
 
-			// Set the Message Digest BaseCryptoRandomStream
+			/// Set the Message Digest BaseCryptoRandomStream
 			void SetMessageDigest(BaseCryptoRandomStream*);
 
-			// Initialize BaseHash
+			/// Initialize BaseHash
 			virtual void Initialize() {};
 
-			// Adds the BaseCryptoRandomStream
+			/// Adds the BaseCryptoRandomStream 
 			virtual void Add(BaseCryptoRandomStream*) {};
 
-			// Finalize the hash
+			/// Finalize the hash
 			virtual void Finalize(void) {};
 
-			// Gets the hash
+			/// Gets the hash 
 			BaseCryptoRandomStream* GetMessageDigest(void);
 
-			// Gets hash length in bits
+			/// Gets hash length in bits
 			virtual unsigned short int GetBitHashLength(void) {return 0;};
 
-			// Gets hash length in unsigned chars
+			/// Gets hash length in unsigned chars
 			virtual unsigned short int GetUCHashLength(void) {return 0;};
 
-			// Gets hash length in unsigned short ints
+			/// Gets hash length in unsigned short ints
 			virtual unsigned short int GetUSHashLength(void) {return 0;};
 
-			// Gets hash length in unsigned long ints
+			/// Gets hash length in unsigned long ints
 			virtual unsigned short int GetULHashLength(void) {return 0;};
 
-			// Gets the type of the object
+			/// Gets the number of bits in the hash block to be hashed
+			virtual unsigned short int GetBitHashBlockLength(void) {return 0;};
+
+			/// Gets the number of unsigned chars in the hash block to be hashed
+			virtual unsigned short int GetUCHashBlockLength(void) {return 0;};
+
+			/// Gets the number of unsigned short ints in the hash block to be hashed
+			virtual unsigned short int GetUSHashBlockLength(void) {return 0;};
+
+			/// Gets the number of unsigned long ints in the hash block to be hashed
+			virtual unsigned short int GetULHashBlockLength(void) {return 0;};
+
+			/// Gets the type of the object
 			virtual Hashes GetType(void) {return NotDefined;};
 	};
   }

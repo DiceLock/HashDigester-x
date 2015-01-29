@@ -1,8 +1,8 @@
 //
 // Creator:    http://www.dicelocksecurity.com
-// Version:    vers.4.0.0.1
+// Version:    vers.5.0.0.1
 //
-// Copyright � 2008-2010 DiceLock Security, LLC. All rigths reserved.
+// Copyright 2008-2011 DiceLock Security, LLC. All rights reserved.
 //
 //                               DISCLAIMER
 //
@@ -16,11 +16,12 @@
 // WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
 // OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 // ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-//
+// 
 // DICELOCK IS A REGISTERED TRADEMARK OR TRADEMARK OF THE OWNERS.
-//
+// 
 
 #include <stdlib.h>
+#include <string.h>
 #include "defaultCryptoRandomStream.h"
 
 
@@ -34,7 +35,7 @@ namespace DiceLockSecurity {
 	// Symmetric cipher type enumerator name
 	const CryptoRandomStreams	DefaultCryptoRandomStream::cryptoRandomStreamType = DefaultStream;
 
-	// Constructor, default
+	// Constructor, default 
 	DefaultCryptoRandomStream::DefaultCryptoRandomStream(void) {
 
 		this->cryptoStream = NULL;
@@ -43,7 +44,7 @@ namespace DiceLockSecurity {
 		this->position = 0;
 	}
 
-	// Constructor, creates an empty stream with the indicated bit length
+	// Constructor, creates an empty stream with the indicated bit length 
 	DefaultCryptoRandomStream::DefaultCryptoRandomStream(unsigned long int streamLength) {
 
 		try {
@@ -75,7 +76,7 @@ namespace DiceLockSecurity {
 	DefaultCryptoRandomStream::~DefaultCryptoRandomStream() {
 
 		if ( this->autoMemory ) {
-			free(this->cryptoStream);
+			free(this->cryptoStream); 
 		}
 		this->cryptoStream = NULL;
 		this->bitLength = 0;
@@ -221,7 +222,7 @@ namespace DiceLockSecurity {
 			else {
 				lengthUC = streamLength / 2;
 				this->cryptoStream = (unsigned char *)calloc( lengthUC, sizeof(unsigned char));
-				if (this->cryptoStream == NULL )
+				if (this->cryptoStream == NULL ) 
 					throw "Memory allocation failure!";
 				else {
 					this->autoMemory = true;
@@ -240,19 +241,19 @@ namespace DiceLockSecurity {
 							case '7' : byte = 0x70; break;
 							case '8' : byte = 0x80; break;
 							case '9' : byte = 0x90; break;
-							case 'A' :
+							case 'A' : 
 							case 'a' : byte = 0xa0; break;
-							case 'B' :
+							case 'B' : 
 							case 'b' : byte = 0xb0; break;
-							case 'C' :
+							case 'C' : 
 							case 'c' : byte = 0xc0; break;
-							case 'D' :
+							case 'D' : 
 							case 'd' : byte = 0xd0; break;
-							case 'E' :
+							case 'E' : 
 							case 'e' : byte = 0xe0; break;
-							case 'F' :
+							case 'F' : 
 							case 'f' : byte = 0xf0; break;
-							default :
+							default : 
 								throw "Erroneous hexadecimal string!";
 								break;
 						}
@@ -267,19 +268,19 @@ namespace DiceLockSecurity {
 							case '7' : byte = byte | 0x07; break;
 							case '8' : byte = byte | 0x08; break;
 							case '9' : byte = byte | 0x09; break;
-							case 'A' :
+							case 'A' : 
 							case 'a' : byte = byte | 0x0a; break;
-							case 'B' :
+							case 'B' : 
 							case 'b' : byte = byte | 0x0b; break;
-							case 'C' :
+							case 'C' : 
 							case 'c' : byte = byte | 0x0c; break;
-							case 'D' :
+							case 'D' : 
 							case 'd' : byte = byte | 0x0d; break;
-							case 'E' :
+							case 'E' : 
 							case 'e' : byte = byte | 0x0e; break;
-							case 'F' :
+							case 'F' : 
 							case 'f' : byte = byte | 0x0f; break;
-							default :
+							default : 
 								throw "Erroneous hexadecimal string!";
 								break;
 						}
