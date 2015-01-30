@@ -1,8 +1,8 @@
 //
 // Creator:    http://www.dicelocksecurity.com
-// Version:    vers.5.0.0.1
+// Version:    vers.6.0.0.1
 //
-// Copyright 2008-2011 DiceLock Security, LLC. All rights reserved.
+// Copyright  2008-2012 DiceLock Security, LLC. All rights reserved.
 //
 //                               DISCLAIMER
 //
@@ -152,69 +152,69 @@ namespace DiceLockSecurity {
 			/// Sets the stream to an specified bit unsigned long int value
 			void FillUL(unsigned long int);
 
-			/// Sets the bit unsigned char (value 0 or 1) at specified postion, position based in array of bits
+			/// Sets the bit unsigned char (value 0 or 1) at specified position, position based in array of bits
 			void SetBitPosition(unsigned long int, unsigned char);
 
-			/// Sets the unsigned char at specified postion, position based in array of unsigned char
+			/// Sets the unsigned char at specified position, position based in array of unsigned char
 			void SetUCPosition(unsigned long int, unsigned char);
 
-			/// Sets the unsigned short at specified postion, position based in array of unsigned short
+			/// Sets the unsigned short at specified position, position based in array of unsigned short
 			void SetUSPosition(unsigned long int, unsigned short int);
 			
-			/// Sets the unsigned long at specified postion, position based in array of unsigned long
+			/// Sets the unsigned long at specified position, position based in array of unsigned long
 			void SetULPosition(unsigned long int, unsigned long int);
 			
-			/// Sets the unsigned 64 bit at specified postion, position based in array of unsigned long long int
+			/// Sets the unsigned 64 bit at specified position, position based in array of unsigned long long int
 			void Set64Position(unsigned long long int, unsigned long long int);
 			
-			/// Gets the bit unsigned char (vakue  0 or 1) at specified postion, position based in array of bits
+			/// Gets the bit unsigned char (vakue  0 or 1) at specified position, position based in array of bits
 			unsigned char GetBitPosition(unsigned long int);
 
-			/// Gets the unsigned char at specified postion, position based in array of unsigned char
+			/// Gets the unsigned char at specified position, position based in array of unsigned char
 			unsigned char GetUCPosition(unsigned long int);
 
-			/// Gets the unsigned short at specified postion, position based in array of unsigned short
+			/// Gets the unsigned short at specified position, position based in array of unsigned short
 			unsigned short int GetUSPosition(unsigned long int);
 			
-			/// Gets the unsigned long at specified postion, position based in array of unsigned long
+			/// Gets the unsigned long at specified position, position based in array of unsigned long
 			unsigned long int GetULPosition(unsigned long int);
 			
-			/// Gets the unsigned 64 bit at specified postion, position based in array of unsigned 64 bit
+			/// Gets the unsigned 64 bit at specified position, position based in array of unsigned 64 bit
 			unsigned long long int Get64Position(unsigned long long int);
 			
-			/// Gets the unsigned char address at specified postion, position based in array of unsigned char
+			/// Gets the unsigned char address at specified position, position based in array of unsigned char
 			unsigned char* GetUCAddressPosition(unsigned long int);
 
-			/// Gets the unsigned short int address at specified postion, position based in array of unsigned short
+			/// Gets the unsigned short int address at specified position, position based in array of unsigned short
 			unsigned short int* GetUSAddressPosition(unsigned long int);
 
-			/// Gets the unsigned long int address at specified postion, position based in array of unsigned long
+			/// Gets the unsigned long int address at specified position, position based in array of unsigned long
 			unsigned long int* GetULAddressPosition(unsigned long int);
 
-			/// Gets the unsigned long long int address at specified postion, position based in array of unsigned 64 bit
+			/// Gets the unsigned long long int address at specified position, position based in array of unsigned 64 bit
 			unsigned long long int* Get64AddressPosition(unsigned long long int);
 
-			/// Gets the baseCryptoRandomStream portion at specified postion with 
+			/// Gets the baseCryptoRandomStream portion at specified position with 
 			/// from baseCryptoRandomStream object, position and length based in array of unsigned char
 			void GetUCSubRandomStream(BaseCryptoRandomStream*, unsigned long int);
 
-			/// Gets the baseCryptoRandomStream portion at specified postion
+			/// Gets the baseCryptoRandomStream portion at specified position
 			/// from baseCryptoRandomStream object, position and length based in array of unsigned short int
 			void GetUSSubRandomStream(BaseCryptoRandomStream*, unsigned long int);
 
-			/// Gets the baseCryptoRandomStream portion at specified postion
+			/// Gets the baseCryptoRandomStream portion at specified position
 			/// from baseCryptoRandomStream object, position and length based in array of unsigned long int
 			void GetULSubRandomStream(BaseCryptoRandomStream*, unsigned long int);
 
-			/// Gets the baseCryptoRandomStream portion at specified postion with a specified length 
+			/// Gets the baseCryptoRandomStream portion at specified position with a specified length 
 			/// from baseCryptoRandomStream object, position and length based in array of unsigned char
 			void GetUCSubRandomStream(BaseCryptoRandomStream*, unsigned long int, unsigned long int);
 
-			/// Gets the baseCryptoRandomStream portion at specified postion with a specified length 
+			/// Gets the baseCryptoRandomStream portion at specified position with a specified length 
 			/// from baseCryptoRandomStream object, position and length based in array of unsigned short int
 			void GetUSSubRandomStream(BaseCryptoRandomStream*, unsigned long int, unsigned long int);
 
-			/// Gets the baseCryptoRandomStream portion at specified postion with a specified length 
+			/// Gets the baseCryptoRandomStream portion at specified position with a specified length 
 			/// from baseCryptoRandomStream object, position and length based in array of unsigned long int
 			void GetULSubRandomStream(BaseCryptoRandomStream*, unsigned long int, unsigned long int);
 

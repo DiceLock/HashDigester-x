@@ -12,6 +12,7 @@ CPP_SRCS += \
 ../source/baseSha32.cpp \
 ../source/defaultCryptoRandomStream.cpp \
 ../source/hashSuite.cpp \
+../source/physicalCryptoRandomStream.cpp \
 ../source/ripemd128.cpp \
 ../source/ripemd160.cpp \
 ../source/ripemd256.cpp \
@@ -31,6 +32,7 @@ OBJS += \
 ./source/baseSha32.o \
 ./source/defaultCryptoRandomStream.o \
 ./source/hashSuite.o \
+./source/physicalCryptoRandomStream.o \
 ./source/ripemd128.o \
 ./source/ripemd160.o \
 ./source/ripemd256.o \
@@ -50,6 +52,7 @@ CPP_DEPS += \
 ./source/baseSha32.d \
 ./source/defaultCryptoRandomStream.d \
 ./source/hashSuite.d \
+./source/physicalCryptoRandomStream.d \
 ./source/ripemd128.d \
 ./source/ripemd160.d \
 ./source/ripemd256.d \

@@ -1,8 +1,8 @@
 //
 // Creator:    http://www.dicelocksecurity.com
-// Version:    vers.5.0.0.1
+// Version:    vers.6.0.0.1
 //
-// Copyright 2009-2011 DiceLock Security, LLC. All rights reserved.
+// Copyright 2009-2012 DiceLock Security, LLC. All rights reserved.
 //
 //                               DISCLAIMER
 //
@@ -29,7 +29,7 @@
 
 #define RIPEMD_Transform128X(f, a, b, c, d, x, s, k)\
 	(*a) += f((*b), (*c), (*d)) + x + k;\
-	(*a) = RIPEMD_RotateLeft((*a), s);
+	(*a) = RIPEMD_RotateLeft((*a), s);\
 
 
 namespace DiceLockSecurity {

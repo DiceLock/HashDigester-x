@@ -1,8 +1,8 @@
 //
 // Creator:    http://www.dicelocksecurity.com
-// Version:    vers.5.0.0.1
+// Version:    vers.6.0.0.1
 //
-// Copyright 2008-2011 DiceLock Security, LLC. All rights reserved.
+// Copyright  2008-2012 DiceLock Security, LLC. All rights reserved.
 //
 //                               DISCLAIMER
 //
@@ -22,9 +22,6 @@
 
 #include <memory.h>
 #include "baseCryptoRandomStream.h"
-
-
-using namespace std;
 
 
 namespace DiceLockSecurity {
@@ -181,7 +178,7 @@ namespace DiceLockSecurity {
 			memset(this->cryptoStream, value, this->GetUCLength()); 
 	}
 
-	// Sets the bit unsigned char (value 0 or 1) at specified postion, position based in array of bits
+	// Sets the bit unsigned char (value 0 or 1) at specified position, position based in array of bits
 	void BaseCryptoRandomStream::SetBitPosition(unsigned long int pos, unsigned char bitData) {
 
 		switch ( pos % 8 ) {
@@ -255,7 +252,7 @@ namespace DiceLockSecurity {
 		}
 	}
 
-	// Sets the unsigned 64 bit at specified postion, position based in array of unsigned long long int
+	// Sets the unsigned 64 bit at specified position, position based in array of unsigned long long int
 	void BaseCryptoRandomStream::Set64Position(unsigned long long int pos, unsigned long long int longData) {
 		unsigned long long int* pointer;
 
@@ -272,7 +269,7 @@ namespace DiceLockSecurity {
 		}
 	}
 
-	// Gets the bit unsigned char (vakue  0 or 1) at specified postion, position based in array of bits
+	// Gets the bit unsigned char (vakue  0 or 1) at specified position, position based in array of bits
 	unsigned char BaseCryptoRandomStream::GetBitPosition(unsigned long int pos) {
 
 		try {
@@ -286,7 +283,7 @@ namespace DiceLockSecurity {
 		}
 	}
 
-	// Gets the unsigned char at specified postion, position based in array of unsigned char
+	// Gets the unsigned char at specified position, position based in array of unsigned char
 	unsigned char BaseCryptoRandomStream::GetUCPosition(unsigned long int pos) {
 
 		try {
@@ -300,7 +297,7 @@ namespace DiceLockSecurity {
 		}
 	}
 
-	// Gets the unsigned short at specified postion, position based in array of unsigned short
+	// Gets the unsigned short at specified position, position based in array of unsigned short
 	unsigned short int BaseCryptoRandomStream::GetUSPosition(unsigned long int pos) {
 
 		try {
@@ -342,7 +339,7 @@ namespace DiceLockSecurity {
 		}
 	}
 			
-	// Gets the unsigned char at specified postion, position based in array of unsigned char
+	// Gets the unsigned char at specified position, position based in array of unsigned char
 	unsigned char* BaseCryptoRandomStream::GetUCAddressPosition(unsigned long int pos) {
 
 		if ( pos >= this->GetUCLength() )
@@ -351,7 +348,7 @@ namespace DiceLockSecurity {
 			return (unsigned char *)(&(this->cryptoStream[pos * sizeof(unsigned char)]));
 	}
 
-	// Gets the unsigned short at specified postion, position based in array of unsigned short
+	// Gets the unsigned short at specified position, position based in array of unsigned short
 	unsigned short int* BaseCryptoRandomStream::GetUSAddressPosition(unsigned long int pos) {
 
 		if ( pos >= this->GetUSLength() )
@@ -360,7 +357,7 @@ namespace DiceLockSecurity {
 			return (unsigned short int *)(&(this->cryptoStream[pos * sizeof(unsigned short int)]));
 	}
 			
-	// Gets the unsigned long at specified postion, position based in array of unsigned long
+	// Gets the unsigned long at specified position, position based in array of unsigned long
 	unsigned long int* BaseCryptoRandomStream::GetULAddressPosition(unsigned long int pos) {
 
 		if ( pos >= this->GetULLength() )
@@ -369,7 +366,7 @@ namespace DiceLockSecurity {
 			return (unsigned long int *)(&(this->cryptoStream[pos * sizeof(unsigned long int)]));
 	}
 			
-	// Gets the unsigned 64 bit at specified postion, position based in array of unsigned 64 bit
+	// Gets the unsigned 64 bit at specified position, position based in array of unsigned 64 bit
 	unsigned long long int* BaseCryptoRandomStream::Get64AddressPosition(unsigned long long int pos) {
 
 		if ( pos >= this->Get64Length() )
@@ -378,7 +375,7 @@ namespace DiceLockSecurity {
 			return (unsigned long long int *)(&(this->cryptoStream[pos * sizeof(unsigned long long int)]));
 	}
 
-	// Gets the baseCryptoRandomStream portion at specified postion with 
+	// Gets the baseCryptoRandomStream portion at specified position with 
 	// from baseCryptoRandomStream object, position and length based in array of unsigned char
 	void BaseCryptoRandomStream::GetUCSubRandomStream(BaseCryptoRandomStream* subStream, unsigned long int pos) {
 
@@ -396,7 +393,7 @@ namespace DiceLockSecurity {
 		}
 	}
 
-	// Gets the baseCryptoRandomStream portion at specified postion
+	// Gets the baseCryptoRandomStream portion at specified position
 	// from baseCryptoRandomStream object, position and length based in array of unsigned short int
 	void BaseCryptoRandomStream::GetUSSubRandomStream(BaseCryptoRandomStream* subStream, unsigned long int pos) {
 
@@ -414,7 +411,7 @@ namespace DiceLockSecurity {
 		}
 	}
 
-	// Gets the baseCryptoRandomStream portion at specified postion
+	// Gets the baseCryptoRandomStream portion at specified position
 	// from baseCryptoRandomStream object, position and length based in array of unsigned long int
 	void BaseCryptoRandomStream::GetULSubRandomStream(BaseCryptoRandomStream* subStream, unsigned long int pos) {
 
@@ -433,7 +430,7 @@ namespace DiceLockSecurity {
 	}
 
 
-	// Gets the baseCryptoRandomStream portion at specified postion with a specified length 
+	// Gets the baseCryptoRandomStream portion at specified position with a specified length 
 	// from baseCryptoRandomStream object, position and length based in array of unsigned char
 	void BaseCryptoRandomStream::GetUCSubRandomStream(BaseCryptoRandomStream* subStream, unsigned long int pos, unsigned long int length) {
 
@@ -456,7 +453,7 @@ namespace DiceLockSecurity {
 		}
 	}
 
-	// Gets the baseCryptoRandomStream portion at specified postion with a specified length 
+	// Gets the baseCryptoRandomStream portion at specified position with a specified length 
 	// from baseCryptoRandomStream object, position and length based in array of unsigned short int
 	void BaseCryptoRandomStream::GetUSSubRandomStream(BaseCryptoRandomStream* subStream, unsigned long int pos, unsigned long int length) {
 
@@ -479,7 +476,7 @@ namespace DiceLockSecurity {
 		}
 	}
 
-	// Gets the baseCryptoRandomStream portion at specified postion with a specified length 
+	// Gets the baseCryptoRandomStream portion at specified position with a specified length 
 	// from baseCryptoRandomStream object, position and length based in array of unsigned long int
 	void BaseCryptoRandomStream::GetULSubRandomStream(BaseCryptoRandomStream* subStream, unsigned long int pos, unsigned long int length) {
 

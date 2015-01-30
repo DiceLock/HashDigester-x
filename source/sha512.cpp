@@ -1,8 +1,8 @@
 //
 // Creator:    http://www.dicelocksecurity.com
-// Version:    vers.5.0.0.1
+// Version:    vers.6.0.0.1
 //
-// Copyright 2009-2011 DiceLock Security, LLC. All rights reserved.
+// Copyright 2009-2012 DiceLock Security, LLC. All rights reserved.
 //
 //                               DISCLAIMER
 //
@@ -222,7 +222,7 @@ namespace DiceLockSecurity {
 	// Adds the BaseCryptoRandomStream to the hash
 	void Sha512::Add(BaseCryptoRandomStream* stream) {
 		unsigned long int startStreamByte = 0, processBytes = 0;
-		long int numBytes = 0;
+		unsigned long int numBytes = 0;
 
 		// If bytes left from previous added stream, then they will be processed now with added data from new stream
 		if (this->remainingBytesLength) {
@@ -271,7 +271,6 @@ namespace DiceLockSecurity {
 			memset(this->remainingBytes + this->remainingBytesLength + 1, 0, this->GetUCHashBlockLength() - this->remainingBytesLength -1);
 			this->Compress(this->messageDigest, this->remainingBytes);
 			this->AddMessageLength(this->remainingBytesLength);
-			int i; i=this->GetUCHashBlockLength();
 			memset(this->remainingBytes, 0, this->GetUCHashBlockLength());
 			this->remainingBytesLength = 0;
 		}

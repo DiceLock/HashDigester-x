@@ -1,8 +1,8 @@
 //
 // Creator:    http://www.dicelocksecurity.com
-// Version:    vers.5.0.0.1
+// Version:    vers.6.0.0.1
 //
-// Copyright 2009-2011 DiceLock Security, LLC. All rights reserved.
+// Copyright 2009-2012 DiceLock Security, LLC. All rights reserved.
 //
 //                               DISCLAIMER
 //
@@ -20,7 +20,7 @@
 // DICELOCK IS A REGISTERED TRADEMARK OR TRADEMARK OF THE OWNERS.
 // 
 
-/*! \mainpage HashDigester-x 5.0.0.1 Documentation
+/*! \mainpage HashDigester-x 6.0.0.1 Documentation
  *
  * \section intro_sec HashDigester-x implements Hash algorithms, hash digest geneartors, for Linux operating systems
  *
@@ -52,6 +52,7 @@
 
 #include "baseCryptoRandomStream.h"
 #include "defaultCryptoRandomStream.h"
+#include "physicalCryptoRandomStream.h"
 #include "ripemd128.h"
 #include "ripemd160.h"
 #include "ripemd256.h"
